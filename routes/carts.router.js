@@ -19,4 +19,14 @@ router.post('/:cid/product/:pid', async (req, res) => {
   updated ? res.json(updated) : res.status(404).send('Carrito no encontrado');
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const carts = await manager.getAll();
+    res.json(carts);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener carritos' });
+  }
+});
+
 export default router;
+
